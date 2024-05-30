@@ -1,20 +1,22 @@
 from basedatos import BaseDatos
-import mysql.connector
+
 
 class Mysql(BaseDatos):
     def __init__(self):
         self.connection = None
 
     def conectar(self):
-        self.connection = mysql.connect()
+        print("Conectando a la base de datos des mysql")
     
     def guardar(self,dato):
-        self.connection = mysql.connect()
+        self.conectar()
+        print(f"Guardando en mysql {dato}")
+        self.close()
 
-    def leer(self, query):
-        cursor = self.connection.cursor()
-        cursor.execute(query)
-        return cursor.fetchall()
+    def leer(self,query):
+        self.conectar()
+        print(f"Leyendo en mysql con el siguiente query {query}")
+        self.close()
 
     def close(self):
-        self.connection.close()
+        print("Cerrando la conexión a la base de datos de mysql")
